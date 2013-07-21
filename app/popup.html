@@ -1,12 +1,28 @@
 <!doctype html>
-<html>
-    <head>
-        <link href="styles/main.css" rel="stylesheet">
-        <!-- build:js scripts/popup.js -->
-        <script src="scripts/popup.js"></script>
-        <!-- endbuild -->
-    </head>
-    <body>
-        <!-- CHROME EXTENSION POPUP -->
-    </body>
+<html ng-app ng-csp>
+<head>
+    <meta charset="UTF-8" />
+    <link href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <!-- build:js scripts/popup.js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="scripts/popup.js"></script>
+    <!-- endbuild -->
+</head>
+<body ng-controller="MainController">
+<!-- CHROME EXTENSION POPUP -->
+<h1>NicoLives</h1>
+<ul>
+    <li class="live" ng-repeat="live in lives">
+        <div class="live-thumbnail">
+            <img ng-src="{{ live.thumbnail_url }}" alt="{{ live.title }}"/>
+        </div>
+        <div class="live-body">
+            <p>{{ live.title }}</p>
+            <p class="live-open-time">{{ live.start_time }}～</p>
+        </div>
+    </li>
+</ul>
+</body>
 </html>

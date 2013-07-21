@@ -1,5 +1,25 @@
-/* Will be compiled down to a single stylesheet with your sass files */
+body {
+    background: #eee;
+    font-size: small;
+}
 
-html {
-    /* Defaults css for cssmin process */
+.live {
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.live-thumbnail,
+.live-body {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.live-thumbnail img {
+    width: 64px;
+}
+
+.live-open-time {
+    font-size: x-large;
 }

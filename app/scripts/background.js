@@ -1,5 +1,11 @@
 'use strict';
 
-chrome.runtime.onInstalled.addListener(function (details) {
-    console.log('previousVersion', details.previousVersion);
-});
+var preservedLives = {};
+
+function preserve(liveId, startTime) {
+    preservedLives[liveId] = startTime;
+}
+
+function cancel(liveId) {
+
+}
