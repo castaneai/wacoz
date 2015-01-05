@@ -1,20 +1,15 @@
+<!-- CHROME EXTENSION POPUP -->
 <!doctype html>
-<html ng-app ng-csp>
+<html ng-app="wacoz" ng-csp>
 <head>
     <meta charset="UTF-8" />
     <link href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
-    <!-- build:js scripts/popup.js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="scripts/popup.js"></script>
-    <!-- endbuild -->
 </head>
-<body ng-controller="MainController">
-<!-- CHROME EXTENSION POPUP -->
-<h1>NicoLives</h1>
+<body ng-controller="LiveListController">
+
 <ul>
-    <li class="live" ng-repeat="live in lives">
+    <li class="live" ng-repeat="live in lives" ng-click="onClickLive(live)">
         <div class="live-thumbnail">
             <img ng-src="{{ live.thumbnail_url }}" alt="{{ live.title }}"/>
         </div>
@@ -24,5 +19,12 @@
         </div>
     </li>
 </ul>
+
+<script src="lib/angular/angular.min.js"></script>
+<script src="lib/jquery/jquery.min.js"></script>
+<script src="lib/underscore/underscore-min.js"></script>
+<script src="lib/moment/moment.js"></script>
+<script src="scripts/controllers/live-list.js"></script>
+<script src="scripts/services/nico-api.js"></script>
 </body>
 </html>
