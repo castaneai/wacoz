@@ -3,9 +3,8 @@ app.service('NicoApi', ['$http', function($http) {
     this.fetchLives = function (date, callback) {
         var url = 'http://live.nicovideo.jp/api/getZeroTimeline?date=' + moment(date).format('YYYY-MM-DD');
         var jsonFilter = function(live) {
-            return live.status == 'comingsoon' &&
-                live.provider_type == 'official' &&
-                live.description.indexOf("上映会") >= 0;
+            return live.status != 'closed' &&
+                live.provider_type == 'official';
         };
 
         $http.get(url).success(function(response) {

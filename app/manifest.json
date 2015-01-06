@@ -22,7 +22,12 @@
     "default_popup": "popup.html"
   },
   "permissions": [
+    "background",
+    "tabs",
+    "alarms",
     "cookies",
-    "http://live.nicovideo.jp/*"
+    "notifications",
+    "http://live.nicovideo.jp/*",
+    "http://nl.simg.jp/*"
   ]
 }

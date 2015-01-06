@@ -4,12 +4,17 @@
 <head>
     <meta charset="UTF-8" />
     <link href="http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/angular/angular-csp.css"/>
     <link href="styles/main.css" rel="stylesheet">
 </head>
 <body ng-controller="LiveListController">
 
 <ul>
+    <li class="live" ng-hide="lives.length > 0">直近の生放送はありません</li>
     <li class="live" ng-repeat="live in lives" ng-click="onClickLive(live)">
+        <div class="live-status" ng-show="isPreserved(live.id)">
+            予約中
+        </div>
         <div class="live-thumbnail">
             <img ng-src="{{ live.thumbnail_url }}" alt="{{ live.title }}"/>
         </div>

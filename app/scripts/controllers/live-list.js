@@ -1,7 +1,7 @@
+var back = chrome.extension.getBackgroundPage();
 var app = angular.module('wacoz', []);
 app.controller('LiveListController', ['$scope', 'NicoApi', function($scope, NicoApi) {
 
-    // view scope vars...
     $scope.lives = [];
 
     NicoApi.fetchLives(new Date(), function(lives) {
@@ -9,9 +9,18 @@ app.controller('LiveListController', ['$scope', 'NicoApi', function($scope, Nico
     });
 
     $scope.onClickLive = function(live) {
-        NicoApi.getOpenGateTime(live.id, function(date) {
-            console.log(live.title, "開場時刻:", date);
+        if ($scope.isPreserved(live.id)) {
+            back.cancel(live.id);
+            return;
+        }
+
+        NicoApi.getOpenGateTime(live.id, function (openTimeMoment) {
+            back.preserve(live.id, openTimeMoment.toDate());
         });
     };
+
+    $scope.isPreserved = function(liveID) {
+        return _.has(back.preservedLivesDict, liveID);
+    }
 
 }]);
