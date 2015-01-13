@@ -95,10 +95,10 @@ var enterLive = function (liveID) {
  */
 function preserve(liveId, startTime) {
     preservedLivesDict[liveId] = startTime;
-    chrome.browserAction.setBadgeText({text: getPreservedCount().toString()});
     chrome.alarms.create(liveId.toString(), {
         when: startTime.getTime() + 2
     });
+    updatePreservedCountBadge();
 }
 
 /**
@@ -109,8 +109,18 @@ function preserve(liveId, startTime) {
 function cancel(liveId) {
     if (typeof(preservedLivesDict[liveId]) !== 'undefined') {
         delete preservedLivesDict[liveId];
-        chrome.browserAction.setBadgeText({
-            text: getPreservedCount() > 0 ? getPreservedCount().toString() : ''
-        });
+        // タイマーを削除する
+        chrome.alarms.clear(liveId.toString());
+        updatePreservedCountBadge();
     }
+}
+
+/**
+ * 現在の予約数を拡張機能アイコンの下のバッジに表示する
+ */
+function updatePreservedCountBadge() {
+    var badgeText = getPreservedCount() > 0 ? getPreservedCount().toString() : '';
+    chrome.browserAction.setBadgeText({
+        text: badgeText
+    });
 }
